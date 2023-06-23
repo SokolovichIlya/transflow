@@ -1,6 +1,7 @@
 <template>
 	<div class="home">
-		<template v-if="!isLoadingRoutes">
+		<SpinnerLoadingComponent v-if="isLoadingRoutes" />
+		<template v-else>
 			<HomeSidebarComponent
 				@changeSelectedRow="changeSelectedRow"
 				@changeViewTypeData="changeViewTypeData"
@@ -27,12 +28,15 @@ import { getRoutes } from '@/api/urls'
 import MapComponent from './components/MapComponent.vue'
 import HomeSidebarComponent from './components/HomeSidebarComponent.vue'
 
+import SpinnerLoadingComponent from '@/components/SpinnerLoadingComponent.vue'
+
 export default {
 	name: 'HomeView',
 
 	components: {
 		MapComponent,
 		HomeSidebarComponent,
+		SpinnerLoadingComponent,
 	},
 
 	data: () => ({
