@@ -1,0 +1,21 @@
+.stop {
+    padding: 6px 0px;
+    margin: 0;
+    list-style: none;
+
+    &--blue {
+        color: blue;   
+    }
+
+    &--red {
+        color: red;
+    }
+
+    &__number {
+        margin-right: 6px;
+    }
+
+    &__name {
+        font-size: 14px;
+    }
+}
