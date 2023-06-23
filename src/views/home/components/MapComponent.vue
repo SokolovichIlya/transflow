@@ -1,6 +1,7 @@
 <template>
     <div class="map-wrapper">
         <l-map
+            @ready="setBoundsMap"
             :zoom="zoom"
             :center="center"
             ref="map"
@@ -102,7 +103,7 @@ export default {
                     const polylineBounds = this.$refs[`polyline-${id}`][0].mapObject.getBounds()
 
                     if (polylineBounds) {
-                        this.setCoordsAndZoomMap(polylineBounds.getCenter(), 12)
+                        this.$refs.map.mapObject.fitBounds(polylineBounds)
                     }
                 })
             } else {
@@ -132,6 +133,10 @@ export default {
     },
 
     methods: {
+        setBoundsMap() {
+            this.$refs.map.mapObject.fitBounds(this.$refs[`polyline-${ this.viewRoutes[0].ID }`][0].mapObject.getBounds())
+        },
+
         getPolylineRouteLatLng(route) {
             const coordsArray = route.Points ? 
                                 route.Points :
@@ -141,8 +146,8 @@ export default {
         },
 
         setCoordsAndZoomMap(coords, zoom) {
-            this.center = coords
-            this.zoom = zoom  
+            this.$refs.map.mapObject.setView(coords)
+            this.$refs.map.mapObject.setZoom(zoom)
         },
 
         focusOnRoute(id) {
